@@ -130,19 +130,6 @@ def phase_manager():
         if (gamePhase == 11):
            resetLoop()
 
-
-        #  just to click 1 zone faster
-        # if (gamePhase == 1):
-        #     resetLoop()
-
-
-# gold grind
-
-
-
-
-
-
 print("The script will start in 5 seconds. Please get your clicker hero window ready.")
 for count in range(5):
         print(time.ctime())
