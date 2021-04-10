@@ -10,6 +10,10 @@ import threading
 # then reset the clicker counter and repeat
 # Note: this script is designed for a laptop with screen Size(width=1366, height=768)
 
+# config
+loopPhaseClicks=50
+
+# variables
 clicks = 0
 gamePhase = 0
 
@@ -17,15 +21,16 @@ gamePhase = 0
 def killmonsters(clickCounter):
     clicks = clickCounter
     global gamePhase
+    global loopPhaseClicks
     #Move mouse to hover over monsters
     pg.moveTo(999, 429, duration=0.1)
-    while clicks < 25 :
+    while clicks < loopPhaseClicks :
         pg.click()
         pg.click()
         clicks += 1
         print("clicks:"+ str(clicks))
     gamePhase +=1
-    print(gamePhase)
+    print("Smash the monsters: "+str(gamePhase))
 
 # gamePhase 1
 def nextlevel():
@@ -34,7 +39,30 @@ def nextlevel():
     pg.moveTo(1060, 73, duration=0.1)
     pg.click()
     gamePhase +=1
-    print(gamePhase)
+    print("Move 1 level up: "+str(gamePhase))
+
+def grindMoreGold():
+    global gamePhase
+    #click on next level
+    pg.moveTo(848, 73, duration=0.1)
+    pg.click()
+    gamePhase +=1
+    print("Move 2 levels back, Grind more gold: "+str(gamePhase))
+
+def damageBoost():
+    #clickstorm
+    pg.moveTo(730, 222, duration=0.1)
+    pg.click()
+    # Powersurge
+    pg.moveTo(730, 260, duration=0.1)
+    pg.click()
+    # lucky Strikes
+    pg.moveTo(730, 330, duration=0.1)
+    pg.click()
+    # Metal Detector
+    pg.moveTo(730, 380, duration=0.1)
+    pg.click()
+    print("Run Powerups for boss")
 
 # gamePhase 2
 def upgrade():
@@ -42,8 +70,15 @@ def upgrade():
     #click for upgrades
     pg.moveTo(157, 274, duration=0.1)
     pg.click()
+    pg.click()
+    pg.moveTo(157, 377, duration=0.1)
+    pg.click()
+    pg.click()
+    pg.moveTo(157, 477, duration=0.1)
+    pg.click()
+    pg.click()
     gamePhase +=1
-    print(gamePhase)
+    print("Upgrade Damage: "+str(gamePhase))
 
 # gamePhase 2
 def resetLoop():
@@ -59,37 +94,73 @@ def resetLoop():
 
 
 def phase_manager():        
-    while gamePhase < 4:
+    while gamePhase < 12:
+        #kill monsters to grind gold and attempt next level 4 times
+        # 1
         if (gamePhase == 0):
             killmonsters(clicks)
-        # if (gamePhase == 1):
-        #     nextlevel()
-        # if (gamePhase == 2):
-        #     upgrade()
-        # if (gamePhase == 3):
-        #    resetLoop()
         if (gamePhase == 1):
-            resetLoop()
-# killmonsters(clicks)
+            nextlevel()
+        # 2
+        if (gamePhase == 2):
+            killmonsters(clicks)
+        if (gamePhase == 3):
+            nextlevel()
+        # 3
+        #back to boss, Boss boost damage goes here
+        if (gamePhase == 4):
+            damageBoost()
+            killmonsters(clicks)
+        if (gamePhase == 5):
+            nextlevel()
+        # 3
+        if (gamePhase == 6):
+            killmonsters(clicks)
+        if (gamePhase == 7):
+            nextlevel()
+        # go back
+        if (gamePhase == 8):
+            killmonsters(clicks)
+        if (gamePhase == 9):
+            grindMoreGold()
+
+        #upgrades + reset
+        if (gamePhase == 10):
+            upgrade()
+        if (gamePhase == 11):
+           resetLoop()
+
+
+        #  just to click 1 zone faster
+        # if (gamePhase == 1):
+        #     resetLoop()
+
+
+# gold grind
+
+
+
+
+
 
 print("The script will start in 5 seconds. Please get your clicker hero window ready.")
 for count in range(5):
         print(time.ctime())
         time.sleep(1)
 
-# phase_manager()
+phase_manager()
 
 # I dont think threading would work well for the normal auto clicker as far as going up in levels just yet, but maybe if i shuffled some things around. But it does increase the speed of clicks greatly hahaha
-threads = []
+# threads = []
 
-for i in range(5):
-    t = threading.Thread(target=phase_manager)
-    t.daemon = True
-    threads.append(t)
+# for i in range(5):
+#     t = threading.Thread(target=phase_manager)
+#     t.daemon = True
+#     threads.append(t)
 
-for i in range(5):
-    threads[i].start()
+# for i in range(5):
+#     threads[i].start()
 
-for i in range(5):
-    threads[i].join()
+# for i in range(5):
+#     threads[i].join()
     
