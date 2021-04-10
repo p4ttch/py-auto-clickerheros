@@ -24,13 +24,14 @@ def killmonsters(clickCounter):
     global loopPhaseClicks
     #Move mouse to hover over monsters
     pg.moveTo(999, 429, duration=0.1)
+    print("Smash the monsters: "+str(gamePhase))
     while clicks < loopPhaseClicks :
         pg.click()
         pg.click()
         clicks += 1
-        print("clicks:"+ str(clicks))
+        print("clicks:"+ str(clicks), end = "\r")
     gamePhase +=1
-    print("Smash the monsters: "+str(gamePhase))
+    print("")
 
 # gamePhase 1
 def nextlevel():
@@ -88,7 +89,7 @@ def resetLoop():
     gamePhase = 0
     print("loop is resetting, waiting 5 seconds")
     for count in range(5):
-        print(time.ctime())
+        print(time.ctime(), end = "\r")
         # Prints the current time with a five second difference
         time.sleep(1) # important pause to regain control of the mouse haha.
 
@@ -132,7 +133,7 @@ def phase_manager():
 
 print("The script will start in 5 seconds. Please get your clicker hero window ready.")
 for count in range(5):
-        print(time.ctime())
+        print(time.ctime(), end = "\r")
         time.sleep(1)
 
 phase_manager()
