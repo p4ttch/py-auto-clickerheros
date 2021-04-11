@@ -51,28 +51,34 @@ def grindMoreGold():
     print("Move 2 levels back, Grind more gold: "+str(gamePhase))
 
 def damageBoost():
-    #clickstorm
-    pg.moveTo(730, 222, duration=0.1)
-    pg.click()
-    # Powersurge
-    pg.moveTo(730, 260, duration=0.1)
-    pg.click()
-    # lucky Strikes
-    pg.moveTo(730, 330, duration=0.1)
-    pg.click()
-    # Metal Detector
-    pg.moveTo(730, 380, duration=0.1)
-    pg.click()
     print("Run Powerups for boss")
+    # Find the full description of the skills on the wiki 
+    # link: https://clickerheroes.fandom.com/wiki/Skills
+    # Clickstorm: 1
+    # Powersurge: 2
+    # Lucky Strikes: 3
+    # Metal Detector: 4
+    # Golden Clicks: 5
+    # The Dark Ritual: 6
+    # Super Clicks: 7
+    # Energize: 8
+    # Reload: 9	
+
+    # Gold collecting stratergy 
+    # pg.typewrite(['6','8','5','9','4','1','2','3','7'], interval=0.1)
+    
+    # Max Damage :double crit
+    # refresh gold
+    pg.typewrite(['6','8','3','5','7','9','4','1','2'], interval=0.1)
 
 # gamePhase 2
 def upgrade():
     global gamePhase
     #click for upgrades
-    pg.moveTo(157, 274, duration=0.1)
+    pg.moveTo(157, 252, duration=0.1)
     pg.click()
     pg.click()
-    pg.moveTo(157, 377, duration=0.1)
+    pg.moveTo(157, 370, duration=0.1)
     pg.click()
     pg.click()
     pg.moveTo(157, 477, duration=0.1)
@@ -80,6 +86,12 @@ def upgrade():
     pg.click()
     gamePhase +=1
     print("Upgrade Damage: "+str(gamePhase))
+
+
+def getBetterHeros():
+    print("Move to better heros , coming soon")
+    # Move to scroll down btn. to go down hero list.
+    # pg.moveTo(663, 710, duration=0.1)
 
 # gamePhase 2
 def resetLoop():
