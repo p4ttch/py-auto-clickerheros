@@ -37,7 +37,8 @@ def killmonsters(clickCounter):
 def nextlevel():
     global gamePhase
     #click on next level
-    pg.moveTo(1060, 73, duration=0.1)
+    # pg.moveTo(1199, 73, duration=0.1) # next arrow
+    pg.moveTo(1070, 73, duration=0.1)
     pg.click()
     gamePhase +=1
     print("Move 1 level up: "+str(gamePhase))
@@ -45,7 +46,8 @@ def nextlevel():
 def grindMoreGold():
     global gamePhase
     #click on next level
-    pg.moveTo(848, 73, duration=0.1)
+    # pg.moveTo(800, 73, duration=0.1) # arrow brevious level
+    pg.moveTo(847, 73, duration=0.1)
     pg.click()
     gamePhase +=1
     print("Move 2 levels back, Grind more gold: "+str(gamePhase))
@@ -69,7 +71,7 @@ def damageBoost():
     
     # Max Damage :double crit
     # refresh gold
-    pg.typewrite(['6','8','3','5','7','9','4','1','2'], interval=0.1)
+    pg.typewrite(['6','8','3','9','5','7','4','1','2'], interval=0.1)
 
 # gamePhase 2
 def upgrade():
@@ -100,10 +102,16 @@ def resetLoop():
     clicks = 0
     gamePhase = 0
     print("loop is resetting, waiting 5 seconds")
-    for count in range(5):
-        print(time.ctime(), end = "\r")
-        # Prints the current time with a five second difference
+    t = 5
+    for x in range(0, 5):
+        print(t)
+        t -= 1
         time.sleep(1) # important pause to regain control of the mouse haha.
+
+    # for count in range(5):
+    #     print(time.ctime(), end = "\r")
+    #     # Prints the current time with a five second difference
+    #     time.sleep(1) # important pause to regain control of the mouse haha.
 
 
 def phase_manager():        
@@ -144,9 +152,15 @@ def phase_manager():
            resetLoop()
 
 print("The script will start in 5 seconds. Please get your clicker hero window ready.")
-for count in range(5):
-        print(time.ctime(), end = "\r")
-        time.sleep(1)
+# for count in range(5):
+#         print(time.ctime(), end = "\r")
+#         time.sleep(1)
+
+st = 5
+for x in range(0, 5):
+    print(st, end = "\r")
+    st -= 1
+    time.sleep(1) # important pause to regain control of the 
 
 phase_manager()
 
