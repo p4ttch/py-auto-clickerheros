@@ -11,7 +11,7 @@ import threading
 # Note: this script is designed for a laptop with screen Size(width=1366, height=768)
 
 # config
-loopPhaseClicks=50
+loopPhaseClicks=60
 
 # variables
 clicks = 0
@@ -114,6 +114,10 @@ def resetLoop():
     #     time.sleep(1) # important pause to regain control of the mouse haha.
 
 
+def click_storm():
+    killmonsters(clicks)
+         
+
 def phase_manager():        
     while gamePhase < 12:
         #kill monsters to grind gold and attempt next level 4 times
@@ -162,19 +166,29 @@ for x in range(0, 5):
     st -= 1
     time.sleep(1) # important pause to regain control of the 
 
-phase_manager()
+# phase_manager()
+
+# click_storm()
 
 # I dont think threading would work well for the normal auto clicker as far as going up in levels just yet, but maybe if i shuffled some things around. But it does increase the speed of clicks greatly hahaha
-# threads = []
+threads = []
 
-# for i in range(5):
-#     t = threading.Thread(target=phase_manager)
-#     t.daemon = True
-#     threads.append(t)
+for i in range(5):
+    t = threading.Thread(target=click_storm)
+    t.daemon = True
+    threads.append(t)
 
-# for i in range(5):
-#     threads[i].start()
+for i in range(5):
+    threads[i].start()
 
-# for i in range(5):
-#     threads[i].join()
+for i in range(5):
+    threads[i].join()
     
+# 2 threads at 10 = 40 clicks
+# 3 threads at 10 = 60 clicks
+# 4 threads at 10 = 80 clicks
+# 4 threads at 1 = 7 clicks
+# 4 threads at 1 = 6 clicks
+# 4 threads at 20 = 160 clicks
+# 5 threads at 20 = 200 clicks
+# 5 threads at 40 = 400 clicks
